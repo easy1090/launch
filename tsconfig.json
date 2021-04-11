@@ -1,0 +1,37 @@
+{
+  "compileOnSave": true, //  属性作用是设置保存文件的时候自动编译，但需要编译器支持。
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+    "target": "es5",                                /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
+    "module": "commonjs",                           /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+    "allowJs": true,                             /* Allow javascript files to be compiled. */
+    "checkJs": true,                             /* Report errors in .js files. */
+    /* Strict Type-Checking Options */
+    "strict": true,                                 /* Enable all strict type-checking options. */
+    "noImplicitThis": true,                      /* Raise error on 'this' expressions with an implied 'any' type. this 隐式具有 any 类型，如果没有指定类型注解，编译器会提示 this 隐式具有类型 any，因为它没有类型注释*/
+    /* Additional Checks */
+    "noUnusedLocals": true,                      /* Report errors on unused locals. */
+    "stripInternal": true,
+    "pretty": true,
+    "declaration": true,
+    "outDir": "lib",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["src/*"]
+    },                      
+    "inlineSourceMap": true,                   /* Emit a single file with source maps instead of having a separate file. */
+    // "inlineSources": true,                       /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
+
+    /* Experimental Options */
+    "experimentalDecorators": true,              /* Enables experimental support for ES7 decorators. */
+    "emitDecoratorMetadata": true,               /* Enables experimental support for emitting type metadata for decorators. */
+
+    /* Advanced Options */
+    "skipLibCheck": true,                           /* Skip type checking of declaration files. */
+    "forceConsistentCasingInFileNames": true,        /* Disallow inconsistently-cased references to the same file. */
+  },
+  "exclude": [
+    "lib",
+    "node_modules"
+  ]
+}
