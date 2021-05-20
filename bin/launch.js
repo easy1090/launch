@@ -1,18 +1,16 @@
-#!/usr/bin/env node  
-// 所以配置#!/usr/bin/env node, 就是解决了不同的用户node路径不同的问题，可以让系统动态的去查找node来执行你的脚本文件。
+#!/usr/bin/env node
 
 const semver = require('semver'); // npm的语义版本包
 const program = require('commander'); // 命令行工具
 const chalk = require('chalk'); // 命令行输出美化
 const requiredNodeVersion = require('../package.json').engines.node;
-const { validateArgsLen } = require('./util');
+const validateArgsLen = require('./util');
 
 /**
  * @param {string | semver.Range} wanted
  * @param {string} cliName
  */
 function checkNodeVersion(wanted, cliName) {
-    console.log('ddd')
     // 检测Node版本是否符合要求范围
     if (!semver.satisfies(process.version, wanted)) {
         console.log(
@@ -27,11 +25,12 @@ function checkNodeVersion(wanted, cliName) {
                 '.\nPlease upgrade your Node version.'   
             )
         )
+        console.log('aaaa')
           // 退出进程
     process.exit(1);
     }
 }
-console.log(requiredNodeVersion);
+
 // 检测node版本
 checkNodeVersion(requiredNodeVersion, '@easy/cli');
 
@@ -41,28 +40,46 @@ program
 
 program
 .command('list')
-.description('显示所有模板')
+.description('list all available project template')
+.action(cmd => {
+  validateArgsLen(process.argv.length, 3);
+  // @ts-ignore
+  require('../lib/src/list-template')();
+});
 
-
-// 初始化项目模板
-program
-  .command('create <template-name> <project-name>')
-  .description('create a new project from a template')
-  .action((templateName, projectName, cmd) => {
-    // 输入参数校验
-    validateArgsLen(process.argv.length, 5);
-    require('../src/command/easy-create')(lowercase(templateName), projectName);
-  });
-
-  
 program
 .command('delete')
 //    .alias('d')
 .description('删除模板')
+.action((templateName, projectName, cmd) => {
+  console.log('')
+})
 
-/**
- * @param {string} str
- */
-function lowercase(str) {
-    return str.toLocaleLowerCase();
-  }
+
+program.parse(process.argv); // 把命令行参数传给commander解析
+
+// 输入easy显示帮助信息
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+}
+
+// // 初始化项目模板
+// program
+//   .command('create <template-name> <project-name>')
+//   .description('create a new project from a template')
+//   .action((templateName, projectName, cmd) => {
+//     console.log('')
+//     // 输入参数校验
+//     validateArgsLen(process.argv.length, 5);
+//     require('../src/command/easy-create')(lowercase(templateName), projectName);
+//   });
+
+  
+
+
+// /**
+//  * @param {string} str
+//  */
+// function lowercase(str) {
+//     return str.toLocaleLowerCase();
+//   }

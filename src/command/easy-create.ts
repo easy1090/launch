@@ -7,6 +7,7 @@ const exec = require('child_process').exec;
 import { readTemplateJson } from '../util/readTemplateData';
 import * as validateProjectName from 'validate-npm-package-name';
 import { clearConsoleWithTitle } from '../util/clearConsole';
+import { pauseSpinner } from "../util/spinner";
 const Creator = require('./creator');
 
 async function create (templateName: any, projectName: any, options: any) {
@@ -83,7 +84,15 @@ async function create (templateName: any, projectName: any, options: any) {
   }
 
     // 目录不存在
-    process.env.EASY_CLI_TEMPLATE_NAME = templateName;
+    process.env.LAUNCH_TEMPLATE_NAME = templateName;
     const creator = new Creator(name, targetDir);
     await creator.create(options);
+};
+
+export default (templateName: any, projectName: any, ...args: any) => {
+  return create(templateName, projectName, args).catch(err => {
+    pauseSpinner();
+    console.error(err);
+    process.exit(1);
+  });
 };

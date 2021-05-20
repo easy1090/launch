@@ -1,12 +1,11 @@
-// @ts-nocheck
 const chalk = require('chalk');
 const readline = require('readline');
 const EventEmitter = require('events');
 const padStart = String.prototype.padStart;
 
-const chalkTag = msg => chalk.bgBlackBright.white.dim(` ${msg} `);
+const chalkTag = (msg: null) => chalk.bgBlackBright.white.dim(` ${msg} `);
 
-function _log(type, tag, message) {
+function _log(type: string, tag: null, message: string | undefined) {
   if (message) {
     exports.events.emit('log', {
       message,
@@ -16,17 +15,17 @@ function _log(type, tag, message) {
   }
 }
 
-const format = (label, msg) => {
-  return msg.split('\n').map((line, i) => {
+const format = (label: any, msg: string) => {
+  return msg.split('\n').map((line: string, i: number) => {
     return i === 0
       ? `${label} ${line}`
-      : padStart(line, chalk.reset(label).length); // 对齐
+      : padStart(Number(line), chalk.reset(label).length); // 对齐
   });
 };
 
-exports.events = new EventEmitter();
+export const events = new EventEmitter();
 
-exports.clearConsole = title => {
+export const clearConsole = (title: string) => {
   if (process.stdout.isTTY) {
     // 判断是否在终端环境
     const blank = '\n'.repeat(process.stdout.rows);
@@ -40,7 +39,7 @@ exports.clearConsole = title => {
   }
 };
 
-exports.warn = (msg, tag = null) => {
+export const warn = (msg: any, tag = null) => {
   console.warn(
     format(
       chalk.bgYellow.black(' WARN ') + (tag ? chalkTag(tag) : ''),
@@ -50,23 +49,23 @@ exports.warn = (msg, tag = null) => {
   _log('warn', tag, msg);
 };
 
-exports.error = (msg, tag = null) => {
+export const error = (msg: { stack: any; }, tag = null) => {
   console.error(
     format(chalk.bgRed(' ERROR ') + (tag ? chalkTag(tag) : ''), chalk.red(msg))
   );
-  _log('error', tag, msg);
+  _log('error', tag, JSON.stringify(msg));
   if (msg instanceof Error) {
     console.error(msg.stack);
     _log('error', tag, msg.stack);
   }
 };
 
-exports.log = (msg = '', tag = null) => {
+export const log = (msg = '', tag = null) => {
   tag ? console.log(format(chalkTag(tag), msg)) : console.log(msg);
   _log('log', tag, msg);
 };
 
-exports.info = (msg, tag = null) => {
+export const info = (msg: any, tag = null) => {
   console.log(
     format(chalk.bgBlue.black(' INFO ') + (tag ? chalkTag(tag) : ''), msg)
   );

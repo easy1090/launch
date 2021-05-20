@@ -17,3 +17,5 @@ export const writeTemplateJson = (json: any) => {
     'utf8'
   );
 };
+
+export default readTemplateJson;
