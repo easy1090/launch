@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import readTemplateJson  from './util/readTemplateData';
+import { readTemplateJson } from './util/readTemplateData';
 import  { stopSpinner } from './util/spinner';
 import { log } from './util/logger';
 

@@ -44,7 +44,7 @@ program
 .action(cmd => {
   validateArgsLen(process.argv.length, 3);
   // @ts-ignore
-  require('../lib/src/list-template')();
+  require('../lib/src/list-template').default();
 });
 
 program

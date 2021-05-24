@@ -12,7 +12,7 @@ export const readTemplateJson = () => {
 
 export const writeTemplateJson = (json: any) => {
   return fs.writeFileSync(
-    path.join(__dirname, '../config/templateGItRepo.json'),
+    path.join(__dirname, '../config/templateGitRepo.json'),
     JSON.stringify(json),
     'utf8'
   );

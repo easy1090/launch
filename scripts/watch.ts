@@ -13,7 +13,7 @@ export async function run(command: string) {
 (async () =>  {
   await run('npm run clean');
 
-  const fileParten = '/src/**/!(*.ts|*.tsx)';
+  const fileParten = './src/**/!(*.ts|*.tsx)';
   console.log(`[COPY]: ${fileParten}`);
 
   const cwd = path.join(__dirname, '../');
@@ -34,7 +34,7 @@ export async function run(command: string) {
 
 async function copyOneFile(file: string, cwd: string) {
   const from = path.join(cwd, file);
-  console.log(file.replace(/\/src\//, '/lib/'))
-  const to = path.join(cwd, file.replace(/\/src\//, '/lib/'));
+  console.log(file.replace(/\/src\//, '/lib/src/'))
+  const to = path.join(cwd, file.replace(/\/src\//, '/lib/src/'));
   await fs.copy(from, to);
 }
