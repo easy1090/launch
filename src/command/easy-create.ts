@@ -8,7 +8,7 @@ import { readTemplateJson } from '../util/readTemplateData';
 import * as validateProjectName from 'validate-npm-package-name';
 import { clearConsoleWithTitle } from '../util/clearConsole';
 import { pauseSpinner } from "../util/spinner";
-const Creator = require('./creator');
+import Creator from './creator';
 
 async function create (templateName: any, projectName: any, options: any) {
   const templateGitRepoJson = readTemplateJson();
@@ -83,10 +83,10 @@ async function create (templateName: any, projectName: any, options: any) {
     }
   }
 
-    // 目录不存在
-    process.env.LAUNCH_TEMPLATE_NAME = templateName;
-    const creator = new Creator(name, targetDir);
-    await creator.create(options);
+  // 目录不存在
+  process.env.LAUNCH_TEMPLATE_NAME = templateName;
+  const creator = new Creator(name, targetDir);
+  await creator.create(options);
 };
 
 export default (templateName: any, projectName: any, ...args: any) => {

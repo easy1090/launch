@@ -47,9 +47,28 @@ program
   require('../lib/src/list-template').default();
 });
 
+// 初始化项目模板
+program
+  .command('create <template-name> <project-name>')
+  .description('create a new project from a template')
+  .action((templateName, projectName, cmd) => {
+    // 输入参数校验
+    validateArgsLen(process.argv.length, 5);
+    // @ts-ignore
+    const fn = require('../lib/src/command/easy-create.js')
+    // console.log('fn::::::::', fn);
+    fn.default(lowercase(templateName), projectName);
+  });
+
+// program.command('add <template-name> <git-repo-address>')
+// .description('add a project template')
+// .action((templateName, gitRepoAddress, cmd) => {
+//   validateArgsLen(process.argv.length, 5);
+//   require('../lib/src/add-template')(lowercase(templateName), gitRepoAddress)
+// });
+
 program
 .command('delete')
-//    .alias('d')
 .description('删除模板')
 .action((templateName, projectName, cmd) => {
   console.log('')
@@ -63,23 +82,9 @@ if (!process.argv.slice(2).length) {
   program.outputHelp();
 }
 
-// // 初始化项目模板
-// program
-//   .command('create <template-name> <project-name>')
-//   .description('create a new project from a template')
-//   .action((templateName, projectName, cmd) => {
-//     console.log('')
-//     // 输入参数校验
-//     validateArgsLen(process.argv.length, 5);
-//     require('../src/command/easy-create')(lowercase(templateName), projectName);
-//   });
-
-  
-
-
-// /**
-//  * @param {string} str
-//  */
-// function lowercase(str) {
-//     return str.toLocaleLowerCase();
-//   }
+/**
+ * @param {string} str
+ */
+function lowercase(str) {
+  return str.toLocaleLowerCase();
+}

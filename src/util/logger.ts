@@ -49,7 +49,7 @@ export const warn = (msg: any, tag = null) => {
   _log('warn', tag, msg);
 };
 
-export const error = (msg: { stack: any; }, tag = null) => {
+export const error = (msg: any, tag = null) => {
   console.error(
     format(chalk.bgRed(' ERROR ') + (tag ? chalkTag(tag) : ''), chalk.red(msg))
   );

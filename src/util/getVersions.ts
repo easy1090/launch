@@ -33,7 +33,7 @@ export const getVersions = async function () {
 // 获取最新版本并且缓存在磁盘本地以便下次使用
 async function getAndCacheLatestVersion(cached: any) {
   const getPackageVersion = require('./getPackageVersion');
-  const res = await getPackageVersion('easy-tool-cli', 'latest');
+  const res = await getPackageVersion.default('easy-tool-cli', 'latest');
   if (res.statusCode === 200) {
     const { version } = res.body;
     // 如果获得版本号是合法的并且与之前缓存的版本不一致说明是最新的
