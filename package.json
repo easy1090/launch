@@ -1,7 +1,6 @@
 {
-    "name": "launch",
+    "name": "launch-cli",
     "version": "0.1.0",
-    "private": true,
     "scripts": {
         "dev:comment": "启动开发环境",
         "watch": "ts-node ./scripts/watch.ts",
